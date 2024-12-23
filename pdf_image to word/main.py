@@ -17,18 +17,18 @@ file_entry = ""
 paths =[]
 #functions
 def get_num_files():
-    no_of_files = int(no_files_entry.get())
+    no_of_files = int(no_files_entry.get()) #receive no of files
     print(no_of_files)
     return no_of_files
 
 def get_file_path():
-    file_entry = str(path_entry.get())
-    for count in range (no_of_files):
-        paths[no_of_files] = file_entry
 
+    for count in range (no_of_files): #the file path is entered
+        file_entry = str(path_entry.get())
+        paths[no_of_files] = file_entry
+        path_entry.delete(0, tk.END)#clears the input box
     convert()
-    return file_entry
-print(paths)
+
 
 def convert():
     count = 0
@@ -42,16 +42,16 @@ def convert():
         for image in images:
             text += pytesseract.image_to_string(image)
 
-    document = Document()
-    document.add_paragraph(text)
-    document.save(f"sample{count}.docx")
+        document = Document()
+        document.add_paragraph(text)
+        document.save(f"sample{count}.docx")
 
-    if os.path.exists(f"sample{count}.docx"):
-        print("Document created successfully.")
-    else:
-        print("Document was not created.")
+        if os.path.exists(f"sample{count}.docx"):
+            print("Document created successfully.")
+        else:
+            print("Document was not created.")
 
-    count += 1
+        count += 1
 
 
 
